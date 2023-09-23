@@ -1,0 +1,47 @@
+int strong()//判断密码强度
+{
+	int n=0,b=0,s=0;
+	int i;
+	char Num[16];
+	cout << "请输入字符串：";
+	cin >> Num;
+	for (i = 0; i < strlen(Num); i++) {
+		char ch = Num[i];
+		if ((ch < 48 || ch>57 && ch < 65) || (ch > 97)) {
+			cout << "非法输入，请输入字符或者数字" << endl;
+			return 0;
+		}
+	}
+	int len = strlen(Num);
+	for (int i = 0; i < len; i++) {
+		if (Num[i] >= 65 && Num[i] <= 90) {
+			b++;
+		}
+		else if (Num[i] >= 97 && Num[i] <= 122) {
+			s++;
+		}
+		else if (Num[i] >= 48 && Num[i] <= 57) {
+			n++;
+		}
+	}
+	if (len < 8 || len>=8&&(s+b==0 || n==0)) {
+		cout << "弱强度密码" << endl;
+	}
+	else if ((len >= 8 && s>0 &&b==0 && n > 0)||(len >= 8 && s == 0 && b > 0 && n > 0)) {
+		cout << "中强度密码" << endl;
+	}
+	else if (len >= 8 && s > 0 && b > 0 && n > 0) {
+		cout << "高强度密码" << endl;
+	}
+	return 1;
+}
+void create()
+{
+	srand((unsigned)time(NULL));
+	char a[] = { "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM" };
+	for (int i = 0, len = strlen(a); i < 16; i++) {
+		cout << a[rand() % len];
+	}
+	cout << endl;
+	system("pause");
+}
